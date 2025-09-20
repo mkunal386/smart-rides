@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        /* ... (Keep the same CSS as ride-request-submitted.html) ... */
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header" style="background-color: #dc3545;">
+        <h2>Your Ride Has Been Rejected</h2>
+    </div>
+    <div class="content">
+        <p>Hello <strong th:text="${passengerName}">Passenger Name</strong>,</p>
+        <p>We regret to inform you that your ride request with the driver <strong th:text="${driverName}">Driver Name</strong> has been rejected.</p>
+
+        <p>The driver may have had a change in plans. We recommend searching for another ride.</p>
+
+        <table class="info-table">
+            <tr>
+                <th>From:</th>
+                <td th:text="${rideOrigin}">Origin</td>
+            </tr>
+            <tr>
+                <th>To:</th>
+                <td th:text="${rideDestination}">Destination</td>
+            </tr>
+        </table>
+    </div>
+    <div class="footer">
+        <p>We apologize for the inconvenience. Please feel free to search for other available rides.</p>
+    </div>
+</div>
+</body>
+</html>

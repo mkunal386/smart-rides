@@ -1,0 +1,168 @@
+/* Main container for the entire page */
+.book-ride-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    padding: 2rem 1rem;
+    background-color: #f8f9fa;
+    min-height: calc(100vh - 80px); /* Adjust based on navbar height */
+}
+
+/* The white box containing the search form */
+.form-box {
+    width: 100%;
+    max-width: 600px; /* Controls the width of the form */
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+}
+
+/* Add this CSS to both HostRidePage.css and BookRidePage.css */
+
+.page-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; /* Aligns button to the right */
+    margin-bottom: 1rem;
+}
+
+.view-history-btn {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.view-history-btn:hover {
+    background-color: #e9e9e9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.form-box h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.form-box .subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.action-button {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.action-button:hover {
+    background-color: #0056b3;
+}
+
+/* Search results section */
+.search-results {
+    width: 100%;
+    max-width: 700px; /* Results can be slightly wider than the form */
+}
+
+.search-results h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.ride-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ride-item {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ride-details p {
+    margin: 0.25rem 0;
+    color: #555;
+}
+
+.ride-details p strong {
+    color: #333;
+}
+
+.ride-action {
+    text-align: right;
+}
+
+.ride-action .fare {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #28a745;
+    margin-bottom: 0.5rem;
+}
+
+.book-now-button {
+    padding: 10px 1.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.book-now-button:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: #dc3545;
+    text-align: center;
+    margin-top: 1rem;
+}
+

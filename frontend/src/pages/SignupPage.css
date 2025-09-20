@@ -1,0 +1,175 @@
+.signup-container {
+  display: flex;
+  height: 100vh;
+  background: #f8faff;
+  overflow: hidden;
+}
+
+.signup-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  position: relative;
+  overflow: visible;
+}
+
+.animation-scene {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Central Location Pin */
+.location-pin {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: url('https://cdn-icons-png.flaticon.com/512/684/684908.png') no-repeat center;
+  background-size: contain;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+/* Dual Icons */
+.dual-icon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  animation: slideAndBounce 1.5s ease-out forwards;
+}
+
+.passenger {
+  background: url('https://cdn-icons-png.flaticon.com/512/847/847969.png') no-repeat center;
+  left: -100px; /* Start off-screen left */
+}
+
+.car {
+  background: url('https://cdn-icons-png.flaticon.com/512/744/744465.png') no-repeat center;
+  right: -100px; /* Start off-screen right */
+}
+
+/* Signup Form */
+.signup-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-box {
+  width: 80%;
+  max-width: 400px;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.signup-box h2 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #1e3c72;
+}
+
+.subtitle {
+  text-align: center;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+}
+
+form input:focus {
+  border-color: #1e3c72;
+  box-shadow: 0 0 5px rgba(30, 60, 114, 0.3);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #1e3c72;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #2a5298;
+}
+
+.login-text {
+  text-align: center;
+  margin-top: 1rem;
+  color: #555;
+}
+
+.link {
+  color: #1e3c72;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideAndBounce {
+  0% { opacity: 0; transform: translateX(0); }
+  70% { opacity: 1; transform: translateX(0) translateY(0); }
+  85% { opacity: 1; transform: translateX(0) translateY(-10px); }
+  100% { opacity: 1; transform: translateX(0) translateY(0); }
+}
+
+/* Adjust positioning for icons to meet at pin */
+.passenger {
+  animation: slideAndBounce 1.5s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.car {
+  animation: slideAndBounce 1.5s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+.passenger {
+  left: 30%;
+  animation-name: slideFromLeft;
+}
+
+.car {
+  right: 30%;
+  animation-name: slideFromRight;
+}
+
+@keyframes slideFromLeft {
+  0% { opacity: 0; transform: translateX(-100px); }
+  70% { opacity: 1; transform: translateX(0) translateY(0); }
+  85% { opacity: 1; transform: translateX(0) translateY(-10px); }
+  100% { opacity: 1; transform: translateX(0) translateY(0); }
+}
+
+@keyframes slideFromRight {
+  0% { opacity: 0; transform: translateX(100px); }
+  70% { opacity: 1; transform: translateX(0) translateY(0); }
+  85% { opacity: 1; transform: translateX(0) translateY(-10px); }
+  100% { opacity: 1; transform: translateX(0) translateY(0); }
+}

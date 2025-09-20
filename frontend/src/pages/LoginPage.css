@@ -1,0 +1,57 @@
+/* src/pages/LoginPage.css */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+}
+
+.login-box {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+  color: #0072ff;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  background: #0072ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.login-box button:hover {
+  background: #005bb5;
+}
+
+.login-box p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.login-box .link {
+  color: #0072ff;
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        /* ... (Keep the same CSS as ride-request-submitted.html) ... */
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <h2>Your Ride Has Been Accepted!</h2>
+    </div>
+    <div class="content">
+        <p>Hello <strong th:text="${passengerName}">Passenger Name</strong>,</p>
+        <p>Great news! The driver <strong th:text="${driverName}">Driver Name</strong> has accepted your ride request. Your ride is now confirmed.</p>
+
+        <p>Please log in to the app to view your booking details and make the payment to secure your seat.</p>
+
+        <table class="info-table">
+            <tr>
+                <th>From:</th>
+                <td th:text="${rideOrigin}">Origin</td>
+            </tr>
+            <tr>
+                <th>To:</th>
+                <td th:text="${rideDestination}">Destination</td>
+            </tr>
+            <tr>
+                <th>Departure Time:</th>
+                <td th:text="${#temporals.format(departureTime, 'dd-MM-yyyy HH:mm')}">Time</td>
+            </tr>
+        </table>
+    </div>
+    <div class="footer">
+        <p>Thank you for choosing us for your travels!</p>
+    </div>
+</div>
+</body>
+</html>

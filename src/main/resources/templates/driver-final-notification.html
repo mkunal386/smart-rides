@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        .email-container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        .header { background-color: #17a2b8; color: #ffffff; padding: 20px; text-align: center; }
+        .content { padding: 20px; color: #555555; line-height: 1.6; }
+        .info-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .info-table th, .info-table td { padding: 12px; border-bottom: 1px solid #eeeeee; text-align: left; }
+        .info-table th { background-color: #f8f8f8; font-weight: normal; }
+        .footer { background-color: #e9ecef; padding: 20px; text-align: center; color: #888888; font-size: 12px; }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <h2>Payment Received! Ride Confirmed!</h2>
+    </div>
+    <div class="content">
+        <p>Hello <strong th:text="${driverName}">Driver Name</strong>,</p>
+        <p>Good news! A passenger has paid for their ride. The booking is now **CONFIRMED**.</p>
+        <p><strong>Passenger:</strong> <strong th:text="${passengerName}">Passenger Name</strong></p>
+
+        <table class="info-table">
+            <tr>
+                <th>From:</th>
+                <td th:text="${rideOrigin}">Origin</td>
+            </tr>
+            <tr>
+                <th>To:</th>
+                <td th:text="${rideDestination}">Destination</td>
+            </tr>
+            <tr>
+                <th>Total Fare:</th>
+                <td th:text="${fare}">Fare</td>
+            </tr>
+        </table>
+    </div>
+    <div class="footer">
+        <p>Thank you for using our service!</p>
+    </div>
+</div>
+</body>
+</html>

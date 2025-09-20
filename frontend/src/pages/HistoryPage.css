@@ -1,0 +1,75 @@
+.history-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.history-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.history-list {
+    list-style: none;
+    padding: 0;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.history-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.ride-info .ride-date {
+    font-size: 14px;
+    color: #888;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.ride-info .ride-route {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.ride-meta {
+    text-align: right;
+}
+
+.ride-fare {
+    font-size: 18px;
+    font-weight: bold;
+    color: #28a745;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.ride-status {
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.ride-status.completed {
+    background-color: #007bff;
+}
+
+.ride-status.cancelled {
+    background-color: #dc3545;
+}

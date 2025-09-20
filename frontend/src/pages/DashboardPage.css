@@ -1,0 +1,63 @@
+.dashboard-container {
+  text-align: center;
+  padding: 40px;
+  background: linear-gradient(135deg, #0077b6, #0096c7, #00b4d8);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.dashboard-title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  animation: fadeInDown 1s ease-in-out;
+}
+
+.dashboard-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.dashboard-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.dashboard-btn {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.host-btn {
+  background: #0077b6;
+  color: white;
+}
+
+.join-btn {
+  background: #00b4d8;
+  color: white;
+}
+
+.dashboard-btn:hover {
+  transform: scale(1.1);
+  background: #023e8a;
+}
+
+/* Simple animations */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}

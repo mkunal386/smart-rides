@@ -1,0 +1,96 @@
+.history-page-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.history-page-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+    font-size: 2em;
+}
+
+.ride-history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ride-history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    background-color: #fafafa;
+    transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.ride-history-item:hover {
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+.ride-info p, .ride-stats p {
+    margin: 0.3rem 0;
+    color: #555;
+    font-size: 0.95em;
+}
+
+.ride-info p strong, .ride-stats p strong {
+    color: #333;
+    min-width: 80px;
+    display: inline-block;
+}
+
+.ride-stats {
+    text-align: right;
+    min-width: 150px;
+}
+
+.ride-stats .status-confirmed {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.no-rides-message {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.no-rides-message p {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.action-link {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.action-link:hover {
+    background-color: #0056b3;
+}
+
+.loading-message, .error-message {
+    text-align: center;
+    font-size: 1.2em;
+    padding: 2rem;
+    color: #d9534f;
+}

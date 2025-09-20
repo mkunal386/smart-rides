@@ -1,0 +1,88 @@
+.payment-container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background-color: #f4f7f6;
+    min-height: calc(100vh - 100px); /* Adjust based on navbar height */
+}
+
+.payment-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    text-align: center;
+}
+
+.payment-box h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.ride-details {
+    text-align: left;
+    margin-bottom: 25px;
+    font-size: 16px;
+    color: #555;
+}
+
+.ride-details p {
+    margin: 10px 0;
+}
+
+.ride-details hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 15px 0;
+}
+
+.total-fare {
+    font-size: 1.2em;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fake-card-form {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.fake-card-form label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.fake-card-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+.card-details-row {
+    display: flex;
+    gap: 15px;
+}
+
+.card-details-row > div {
+    flex: 1;
+}
+
+.success-message h2 {
+    color: #28a745;
+}
+.success-message p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.5;
+}

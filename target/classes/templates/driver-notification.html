@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${subject}">New Ride Alert - Smart Rides</title>
+    <style>
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f7f7f7; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+        .header { background-color: #333333; padding: 20px; text-align: center; color: #ffffff; font-size: 24px; font-weight: bold; }
+        .hero { position: relative; width: 100%; height: 200px; overflow: hidden; }
+        .hero img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .hero-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; }
+        .hero-text { color: #ffffff; font-size: 28px; font-weight: bold; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+        .content { padding: 30px; color: #333333; line-height: 1.6; }
+        .content h2 { color: #222222; font-size: 22px; margin-bottom: 20px; text-align: center; }
+        .card { background-color: #fdfdfd; border: 1px solid #eeeeee; border-radius: 6px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+        .card p { margin: 0 0 10px 0; }
+        .card strong { color: #555555; }
+        .button-container { text-align: center; margin-top: 30px; margin-bottom: 20px; }
+        .button { background-color: #4CAF50; color: #ffffff; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 8px; display: inline-block; font-size: 18px; }
+        .footer { background-color: #eeeeee; padding: 25px; text-align: center; font-size: 12px; color: #777777; border-top: 1px solid #dddddd; }
+        .footer p { margin: 0; }
+        .detail-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .detail-row span:first-child { font-weight: bold; color: #555; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        Smart Rides
+    </div>
+
+    <div class="hero">
+        <img src="https://plus.unsplash.com/premium_photo-1683140623381-f996d57f25b2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Car background image">
+        <div class="hero-overlay">
+            <span class="hero-text">New Ride Request!</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <h2>You have a new booking waiting!</h2>
+        <p>Dear <strong th:text="${driverName}">Driver</strong>,</p>
+        <p>A passenger has just booked a ride with you. Please review the details below:</p>
+
+        <div class="card">
+            <h3>Ride Details</h3>
+            <div class="detail-row">
+                <span>Pickup Location:</span>
+                <span th:text="${pickupLocation}">123 Main St, City A</span>
+            </div>
+            <div class="detail-row">
+                <span>Destination:</span>
+                <span th:text="${destination}">456 Oak Ave, City B</span>
+            </div>
+            <div class="detail-row">
+                <span>Date:</span>
+                <span th:text="${rideDate}">2025-01-01</span>
+            </div>
+            <div class="detail-row">
+                <span>Time:</span>
+                <span th:text="${rideTime}">10:30 AM</span>
+            </div>
+            <div class="detail-row">
+                <span>Fare:</span>
+                <span th:text="${fare}">₹500.00</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Passenger Details</h3>
+            <div class="detail-row">
+                <span>Name:</span>
+                <span th:text="${passengerName}">John Doe</span>
+            </div>
+            <div class="detail-row">
+                <span>Contact:</span>
+                <span th:text="${passengerPhone}">+1234567890</span>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <a href="#" class="button">View Ride in App</a>
+        </div>
+
+        <p style="text-align: center; font-size: 14px; color: #666;">
+            Please accept or decline the ride within the Smart Rides app.
+        </p>
+    </div>
+
+    <div class="footer">
+        <p>Thank you for being a Smart Rides Driver!</p>
+        <p>&copy; 2025 Smart Rides. All rights reserved.</p>
+    </div>
+</div>
+
+</body>
+</html>
