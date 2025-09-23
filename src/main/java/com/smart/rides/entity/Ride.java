@@ -50,10 +50,18 @@ public class Ride {
     @Column(nullable = true)
     private String carColor;
 
+    // --- Change: New field for ride status ---
+    @Enumerated(EnumType.STRING)
+    private RideStatus status;
+
     @PrePersist
     public void onCreate() {
         if (createdAt == null) {
             createdAt = LocalDateTime.now();
+        }
+        // --- Change: Set default status to ACTIVE ---
+        if (status == null) {
+            status = RideStatus.ACTIVE;
         }
     }
 
@@ -98,4 +106,8 @@ public class Ride {
 
     public Long getDriverId() { return driverId; }
     public void setDriverId(Long driverId) { this.driverId = driverId; }
+
+    // --- Change: New getter and setter for status ---
+    public RideStatus getStatus() { return status; }
+    public void setStatus(RideStatus status) { this.status = status; }
 }

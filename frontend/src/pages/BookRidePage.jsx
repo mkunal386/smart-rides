@@ -157,120 +157,83 @@ const BookRidePage = () => {
 
     return (
         <div className="book-ride-container">
-            <div className="form-box">
-                <h2>Find Your Ride</h2>
+            <section className="hero">
+                <h1>Where are you <span className="accent">going today?</span></h1>
+                <p>Find your perfect ride and start saving money</p>
+            </section>
 
-                {/* --- New Button --- */}
-                <div className="page-actions">
-                    <Link to="/my-booked-rides" className="view-history-btn">View My Booked Rides</Link>
+            <form onSubmit={handleSearch} className="search-row">
+                <div className="input-chip">
+                    <span role="img" aria-label="from">📍</span>
+                    <input type="text" value={source} onChange={handleSourceChange} placeholder="From where?" required />
+                    {sourceSuggestions.length > 0 && (
+                        <ul className="suggestions-list">
+                            {sourceSuggestions.map(s => (
+                                <li key={s.place_id} onClick={() => handleSelectSuggestion(s, setSource, setSourceSuggestions, setSourceCoords, setIsSourceSelected)}>{s.display_name}</li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
+                <div className="input-chip">
+                    <span role="img" aria-label="to">📍</span>
+                    <input type="text" value={destination} onChange={handleDestinationChange} placeholder="To where?" required />
+                    {destinationSuggestions.length > 0 && (
+                        <ul className="suggestions-list">
+                            {destinationSuggestions.map(s => (
+                                <li key={s.place_id} onClick={() => handleSelectSuggestion(s, setDestination, setDestinationSuggestions, setDestinationCoords, setIsDestinationSelected)}>{s.display_name}</li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+                <div className="input-chip">
+                    <span role="img" aria-label="date">🗓️</span>
+                    <input type="text" placeholder="dd-mm-yyyy" readOnly />
+                </div>
+                <div className="input-chip">
+                    <span role="img" aria-label="passengers">👤</span>
+                    <input type="text" placeholder="1 passenger" readOnly />
+                </div>
+                <button type="submit" className="search-btn" disabled={isLoading}>{isLoading ? 'Searching...' : 'Search Rides'}</button>
+                <button type="button" className="filters-btn">Filters</button>
+            </form>
 
-                <p className="subtitle">Enter your source and destination to find available rides.</p>
-
-                <form onSubmit={handleSearch}>
-                    <div className="input-group">
-                        <label>From</label>
-                        <input
-                            type="text"
-                            value={source}
-                            onChange={handleSourceChange}
-                            placeholder="Type starting point..."
-                            required
-                        />
-                        {sourceSuggestions.length > 0 && (
-                            <ul className="suggestions-list">
-                                {sourceSuggestions.map(s => (
-                                    <li
-                                        key={s.place_id}
-                                        onClick={() => handleSelectSuggestion(
-                                            s,
-                                            setSource,
-                                            setSourceSuggestions,
-                                            setSourceCoords,
-                                            setIsSourceSelected
+            <div className="results-wrap">
+                <div className="search-results">
+                    <h3>Available Rides</h3>
+                    {isLoading && <p>Loading...</p>}
+                    {searched && !isLoading && foundRides.length === 0 && (
+                        <p>No rides found for this route. Try another search!</p>
+                    )}
+                    {foundRides.length > 0 && (
+                        <ul className="ride-list">
+                            {foundRides.map(ride => (
+                                <li key={ride.id} className="ride-item">
+                                    <div className="ride-details">
+                                        <p><strong>From:</strong> {ride.source}</p>
+                                        <p><strong>To:</strong> {ride.destination}</p>
+                                        <p><strong>Time:</strong> {new Date(ride.dateTime).toLocaleString()}</p>
+                                        <p><strong>Driver:</strong> {ride.driver.name}</p>
+                                        <p><strong>Seats Left:</strong> {ride.availableSeats}</p>
+                                    </div>
+                                    <div className="ride-action">
+                                        <p className="fare">₹{ride.fare.toFixed(2)}</p>
+                                        {ride.driver.id === currentUserId ? (
+                                            <p className="your-ride-label">✅ This is your ride</p>
+                                        ) : (
+                                            <button onClick={() => handleBookRide(ride)} className="book-now-button" disabled={isBooking}>
+                                                {isBooking ? 'Booking...' : 'Book Ride'}
+                                            </button>
                                         )}
-                                    >
-                                        {s.display_name}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-
-                    <div className="input-group">
-                        <label>To</label>
-                        <input
-                            type="text"
-                            value={destination}
-                            onChange={handleDestinationChange}
-                            placeholder="Type destination..."
-                            required
-                        />
-                        {destinationSuggestions.length > 0 && (
-                            <ul className="suggestions-list">
-                                {destinationSuggestions.map(s => (
-                                    <li
-                                        key={s.place_id}
-                                        onClick={() => handleSelectSuggestion(
-                                            s,
-                                            setDestination,
-                                            setDestinationSuggestions,
-                                            setDestinationCoords,
-                                            setIsDestinationSelected
-                                        )}
-                                    >
-                                        {s.display_name}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-
-                    <button type="submit" disabled={isLoading} className="action-button">
-                        {isLoading ? 'Searching...' : 'Search Rides'}
-                    </button>
-                </form>
-
-                {error && <p className="error-message">{error}</p>}
-                {bookingError && <p className="error-message">{bookingError}</p>}
-                {bookingSuccess && <p className="success-message">{bookingSuccess}</p>}
-            </div>
-
-            <div className="search-results">
-                <h3>Available Rides</h3>
-                {isLoading && <p>Loading...</p>}
-                {searched && !isLoading && foundRides.length === 0 && (
-                    <p>No rides found for this route. Try another search!</p>
-                )}
-                {foundRides.length > 0 && (
-                    <ul className="ride-list">
-                        {foundRides.map(ride => (
-                            <li key={ride.id} className="ride-item">
-                                <div className="ride-details">
-                                    <p><strong>From:</strong> {ride.source}</p>
-                                    <p><strong>To:</strong> {ride.destination}</p>
-                                    <p><strong>Time:</strong> {new Date(ride.dateTime).toLocaleString()}</p>
-                                    <p><strong>Driver:</strong> {ride.driver.name}</p>
-                                    <p><strong>Seats Left:</strong> {ride.availableSeats}</p>
-                                </div>
-                                <div className="ride-action">
-                                    <p className="fare">₹{ride.fare.toFixed(2)}</p>
-                                    {ride.driver.id === currentUserId ? (
-                                        <p className="your-ride-label">✅ This is your ride</p>
-                                    ) : (
-                                        <button
-                                            onClick={() => handleBookRide(ride)} // --- Change here ---
-                                            className="book-now-button"
-                                            disabled={isBooking}
-                                        >
-                                            {isBooking ? 'Booking...' : 'Book Now'}
-                                        </button>
-                                    )}
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                )}
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+                <div className="right-panels">
+                    <div className="panel"><h4>Recent Searches</h4></div>
+                    <div className="panel"><h4>Saved Routes</h4></div>
+                </div>
             </div>
         </div>
     );

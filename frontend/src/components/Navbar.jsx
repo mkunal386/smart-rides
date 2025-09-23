@@ -21,6 +21,8 @@ const Navbar = () => {
         <Link to="/book-ride">Book Ride</Link>
         {/* New link for History */}
         <Link to="/history">History</Link>
+        {/* Change: New link for the Admin Dashboard */}
+        <Link to="/admin/dashboard">Admin Dashboard</Link>
         <button onClick={handleLogout} className="logout-btn">
           Logout
         </button>

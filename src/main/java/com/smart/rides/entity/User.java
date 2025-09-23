@@ -27,6 +27,16 @@ public class User {
     @Column(nullable = false)
     private String passwordHash;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    // --- New fields for user management ---
+    private boolean isBlocked = false;
+    private boolean isVerified = false;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status = UserStatus.PENDING_VERIFICATION;
+
     // Constructor
     public User() {}
 
@@ -45,4 +55,17 @@ public class User {
 
     public String getPasswordHash() { return passwordHash; }
     public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
+
+    // --- New Getters and Setters for management fields ---
+    public boolean getIsBlocked() { return isBlocked; }
+    public void setIsBlocked(boolean isBlocked) { this.isBlocked = isBlocked; }
+
+    public boolean getIsVerified() { return isVerified; }
+    public void setIsVerified(boolean isVerified) { this.isVerified = isVerified; }
+
+    public UserStatus getStatus() { return status; }
+    public void setStatus(UserStatus status) { this.status = status; }
 }

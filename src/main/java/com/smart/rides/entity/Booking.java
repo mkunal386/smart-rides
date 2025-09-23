@@ -25,13 +25,23 @@ public class Booking {
     @Column(updatable = false)
     private LocalDateTime bookingTime;
 
-    // --- New field for booking status ---
+    // --- Change: New field for booking status ---
     @Enumerated(EnumType.STRING)
     private BookingStatus status;
 
+    // --- Change: New field for payment status ---
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
+
     @PrePersist
     protected void onCreate() {
-        bookingTime = LocalDateTime.now();
+        if (bookingTime == null) {
+            bookingTime = LocalDateTime.now();
+        }
+        // --- Change: Set default payment status to PENDING ---
+        if (paymentStatus == null) {
+            paymentStatus = PaymentStatus.PENDING;
+        }
     }
 
     // --- Getters and Setters ---
@@ -51,4 +61,8 @@ public class Booking {
     // --- New getter and setter for status ---
     public BookingStatus getStatus() { return status; }
     public void setStatus(BookingStatus status) { this.status = status; }
+
+    // --- Change: Getter and Setter for paymentStatus ---
+    public PaymentStatus getPaymentStatus() { return paymentStatus; }
+    public void setPaymentStatus(PaymentStatus paymentStatus) { this.paymentStatus = paymentStatus; }
 }

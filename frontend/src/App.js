@@ -17,6 +17,7 @@ import MyHostedRidesPage from "./pages/MyHostedRidesPage";
 import MyBookedRidesPage from "./pages/MyBookedRidesPage";
 
 import Navbar from "./components/Navbar";
+import AdminDashboard from "./pages/AdminDashboard"; // Change: Import the AdminDashboard component
 
 function App() {
   return (
@@ -99,6 +100,16 @@ function App() {
           }
         />
 
+        {/* Change: Add the new admin dashboard route */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <>
+              <Navbar />
+              <AdminDashboard />
+            </>
+          }
+        />
       </Routes>
     </Router>
   );

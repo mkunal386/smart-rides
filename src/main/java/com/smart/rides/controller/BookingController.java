@@ -2,7 +2,7 @@ package com.smart.rides.controller;
 
 import com.smart.rides.dto.BookingRequest;
 import com.smart.rides.dto.DriverResponse;
-import com.smart.rides.dto.PaymentConfirmation; // New import for payment DTO
+import com.smart.rides.dto.PaymentConfirmation;
 import com.smart.rides.entity.Booking;
 import com.smart.rides.entity.BookingStatus;
 import com.smart.rides.entity.Ride;
@@ -193,16 +193,23 @@ public class BookingController {
         return ResponseEntity.ok("Payment confirmed and booking finalized.");
     }
 
-    // Add this method to your existing BookingController class
-    @CrossOrigin(origins = "http://localhost:3000") // Add this to allow frontend to access this endpoint
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/driver-requests/{driverId}")
     public ResponseEntity<List<Booking>> getPendingBookingsForDriver(@PathVariable Long driverId) {
         return ResponseEntity.ok(bookingRepository.findByRide_Driver_IdAndStatus(driverId, BookingStatus.PENDING));
     }
 
-    @CrossOrigin(origins = "http://localhost:3000") // This is the change
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/passenger/{passengerId}")
     public ResponseEntity<List<Booking>> getBookingsByPassenger(@PathVariable Long passengerId) {
         return ResponseEntity.ok(bookingRepository.findByPassenger_Id(passengerId));
+    }
+
+    // --- New API Endpoint for Admin Dashboard ---
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/admin/all")
+    public ResponseEntity<List<Booking>> getAllBookingsForAdmin() {
+        List<Booking> allBookings = bookingRepository.findAll();
+        return ResponseEntity.ok(allBookings);
     }
 }

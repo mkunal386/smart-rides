@@ -8,30 +8,31 @@ const MyHostedRidesPage = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    // --- New State for Pending Bookings ---
     const [pendingBookings, setPendingBookings] = useState([]);
     const [isProcessing, setIsProcessing] = useState(false);
+    
+    // --- Change: New state for managing the 'End Ride' button loading state ---
+    const [isEndingRide, setIsEndingRide] = useState(false);
 
     const user = JSON.parse(localStorage.getItem('user'));
 
-    // --- New function to fetch both hosted rides and pending bookings ---
     const fetchAllData = async () => {
         if (!user || !user.id) {
             alert("You must be logged in to view your hosted rides.");
             navigate('/login');
             return;
         }
+        
+        // Use a common function to fetch all data to avoid code duplication
+        const fetchData = async (url) => {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Failed to fetch data.');
+            return response.json();
+        };
 
         try {
-            // Fetch hosted rides
-            const ridesResponse = await fetch(`http://localhost:8080/api/rides/driver/${user.id}`);
-            if (!ridesResponse.ok) throw new Error('Failed to fetch your hosted rides.');
-            const ridesData = await ridesResponse.json();
-
-            // --- New API call to fetch pending bookings for the driver ---
-            const bookingsResponse = await fetch(`http://localhost:8080/api/v1/bookings/driver-requests/${user.id}`);
-            if (!bookingsResponse.ok) throw new Error('Failed to fetch pending bookings.');
-            const bookingsData = await bookingsResponse.json();
+            const ridesData = await fetchData(`http://localhost:8080/api/rides/driver/${user.id}`);
+            const bookingsData = await fetchData(`http://localhost:8080/api/v1/bookings/driver-requests/${user.id}`);
 
             setHostedRides(ridesData);
             setPendingBookings(bookingsData);
@@ -45,8 +46,7 @@ const MyHostedRidesPage = () => {
     useEffect(() => {
         fetchAllData();
     }, [navigate]);
-    
-    // --- New function to handle driver's decision (accept/reject) ---
+
     const handleDriverResponse = async (bookingId, decision) => {
         setIsProcessing(true);
         try {
@@ -58,9 +58,7 @@ const MyHostedRidesPage = () => {
             
             const response = await fetch('http://localhost:8080/api/v1/bookings/driver-response', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
             });
 
@@ -69,18 +67,36 @@ const MyHostedRidesPage = () => {
                 throw new Error(errorData.message || 'Failed to process request.');
             }
             
-            // Refetch all data to update the UI
             fetchAllData();
-
             alert(`Ride ${decision}ed successfully!`);
-
         } catch (err) {
             setError(err.message);
         } finally {
             setIsProcessing(false);
         }
     };
-
+    
+    // --- Change: New function to handle ending a ride ---
+    const handleEndRide = async (rideId) => {
+        setIsEndingRide(true);
+        try {
+            const response = await fetch(`http://localhost:8080/api/rides/end/${rideId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to end the ride.');
+            }
+            
+            alert('Ride has been successfully completed!');
+            fetchAllData(); // Refresh the list of rides
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsEndingRide(false);
+        }
+    };
 
     if (isLoading) return <div className="loading-message">Loading your rides...</div>;
     if (error) return <div className="error-message">{error}</div>;
@@ -98,12 +114,24 @@ const MyHostedRidesPage = () => {
                                     <p><strong>Route:</strong> {ride.source} to {ride.destination}</p>
                                     <p><strong>Date:</strong> {new Date(ride.dateTime).toLocaleString()}</p>
                                     <p><strong>Car:</strong> {ride.carModel} ({ride.plateNumber})</p>
+                                    <p><strong>Status:</strong> {ride.status}</p> {/* Change: Display ride status */}
                                 </div>
                                 <div className="ride-stats">
                                     <p><strong>Fare:</strong> ₹{ride.fare.toFixed(2)}</p>
                                     <p><strong>Seats:</strong> {ride.availableSeats} available</p>
                                 </div>
                                 
+                                {/* --- New button to end the ride --- */}
+                                {ride.status === 'ACTIVE' && (
+                                    <button 
+                                        onClick={() => handleEndRide(ride.id)}
+                                        disabled={isEndingRide}
+                                        className="end-ride-button"
+                                    >
+                                        {isEndingRide ? 'Ending...' : 'End Ride'}
+                                    </button>
+                                )}
+
                                 {/* --- New section for pending requests --- */}
                                 {rideBookings.length > 0 && (
                                     <div className="pending-requests">
